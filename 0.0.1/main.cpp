@@ -11,10 +11,8 @@ class List
 {
 	Node *Head;
 public:
-	List() 
-	{ 
-		Head = NULL; 
-	}
+	List():Head(NULL){}
+
 	~List()
 	{
 		while (Head != NULL)
@@ -24,7 +22,7 @@ public:
 			Head = temp;
 		}
 	}
-	void Add(int x)
+	void Addition(int x)
 	{
 		Node *temp = new Node;
 		temp->data = x;
@@ -36,20 +34,29 @@ public:
 		Node *temp = Head;
 		while (temp != NULL)
 		{
-			cout << temp->data << "";
+			cout << temp->data << " ";
 			temp = temp->next;
 		}
 	}
 	Node * reverse(Node * head)
 	{
-		Node *rev = NULL;
-		for (Node *node = head, *next_nod; node != NULL; node = next_nod)
+		Node *tmp = head;
+		Node *n = tmp;
+		while (n->next != 0)
+			n = n->next;
+
+		head = n;
+
+		while (n != tmp) 
 		{
-			next_nod = node->next;
-			node->next = rev;
-			rev = node;
+			n = tmp;
+			while (n->next->next != 0)
+			{
+				n = n->next;
+			}
+			n->next->next = n;
+			n->next = 0;
 		}
-		return rev;
 	}
 };
 
