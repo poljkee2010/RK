@@ -4,13 +4,12 @@ using namespace std;
 template <typename Iterator, typename T>
 auto find_two_elements_with_sum(Iterator first, Iterator last, T c) //auto - автоматическое определение типа функции
 {
-	bool Iterators = false;
 	size_t array[10] = {0,1,2,3,4,5,6,7,8,9};
-
 	if (first == last || first > last) 
 	{
 		throw runtime_error("error");
 	}
+	bool Iterators = false;
 	while (first != last)
 	{
 		int Summ = array[first] + array[last];
