@@ -12,10 +12,10 @@ auto find_two_elements_with_sum(Iterator first, Iterator last, T c) //auto - Ð°Ð
 	bool Iterators = false;
 	while (first != last)
 	{
-		int Summ = array[first] + array[last];
-		if (Summ < c)
+		int Sum = array[first] + array[last];
+		if (Sum < c)
 			first++;
-		else if (Summ > c)
+		else if (Sum > c)
 			last--;
 		else
 		{
