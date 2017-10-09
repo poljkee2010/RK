@@ -52,3 +52,8 @@ public:
 		return rev;
 	}
 };
+
+int main()
+{
+	return 0;
+}
