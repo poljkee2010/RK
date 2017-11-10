@@ -2,37 +2,38 @@
 using namespace std;
 
 template <typename Iterator, typename T>
-auto find_two_elements_with_sum(Iterator first, Iterator last, T c) //auto - автоматическое определение типа функции
+auto find_two_elements_with_sum(Iterator first, Iterator last, T c)->std::pair<bool, std::pair<Iterator, Iterator>>
 {
-	size_t array[10] = {0,1,2,3,4,5,6,7,8,9};
-	if (first == last || first > last) 
+	std::pair<bool, std::pair<Iterator, Iterator>> found_pair;
+
+	auto end = last - 1;
+
+	while (*first < *end)
 	{
-		throw runtime_error("error");
-	}
-	bool Iterators = false;
-	while (first != last)
-	{
-		int Sum = array[first] + array[last];
-		if (Sum < c)
-			first++;
-		else if (Sum > c)
-			last--;
+		T sum = *first + *end;
+		if (sum == c)
+		{
+			found_pair.first = true;
+			found_pair.second.first = first;
+			found_pair.second.second = end;
+
+			return found_pair;
+		}
 		else
 		{
-			Iterators = true;
-			cout << "We have next iterators: " << first << " " << last << endl;
-			break;
+			if (sum < c) first++;
+			else end--;
 		}
 	}
-	return 0;
+
+	return found_pair;
 }
 
 int main()
 {
-	int c;
-	cin >> c;
+	int arr[] = { -6, -4, 0, 2, 5, 7, 8, 8, 13, 17 };
 
-	size_t a = 0, b = 9;
-	find_two_elements_with_sum(a,b,c);
+	auto found_pair = find_two_elements_with_sum(arr, arr + sizeof(arr)/sizeof(arr[0]), 11);
+
 	return 0;
 }
