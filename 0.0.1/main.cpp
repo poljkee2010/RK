@@ -1,66 +1,44 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
+struct Node {
 	int data;
-	Node * next;
+	Node* next;
 };
 
-class List
+Node* reverse(Node * head)
 {
-	Node *Head;
-public:
-	List():Head(NULL){}
+	struct Node* prev = nullptr;
+	struct Node* current = head;
+	struct Node* next;
 
-	~List()
+	while (current)
 	{
-		while (Head != NULL)
-		{
-			Node *temp = Head->next;
-			delete Head;
-			Head = temp;
-		}
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
 	}
-	void Addition(int x)
-	{
-		Node *temp = new Node;
-		temp->data = x;
-		temp->next = Head;
-		Head = temp;
-	}
-	void Show()
-	{
-		Node *temp = Head;
-		while (temp != NULL)
-		{
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-	}
-	Node * reverse(Node * head)
-	{
-		Node *tmp = head;
-		Node *n = tmp;
-		while (n->next != 0)
-			n = n->next;
 
-		head = n;
-
-		while (n != tmp) 
-		{
-			n = tmp;
-			while (n->next->next != 0)
-			{
-				n = n->next;
-			}
-			n->next->next = n;
-			n->next = 0;
-		}
-	}
-};
+	return prev;
+}
 
 int main()
 {
+	Node* head = new Node();
+	Node* cur = head, *newEl;
+	head->data = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		newEl = new Node();
+		newEl->data = i + 1;
+		newEl->next = nullptr;
+		cur->next = newEl;
+		cur = newEl;
+	}
+
+	head = reverse(head);
+
 	return 0;
 }
